@@ -23,6 +23,7 @@ yarn-error.log*
 .pnp.mjs
 .pnp.json
 .pnp.ts
+.nx
 
 # =============================================================================
 # TYPESCRIPT & JAVASCRIPT

@@ -1,39 +1,23 @@
 {
-  "name": "mcp-server-template",
+  "name": "openai-app-template",
   "version": "0.0.1",
   "private": true,
-  "main": "dist/index.js",
-  "description": "Alpic MCP Server Template",
-  "files": [
-    "dist"
-  ],
-  "bin": {
-    "mcp-server-template": "./dist/index.js"
-  },
-  "type": "module",
+  "description": "Alpic OpenAI App Template",
   "scripts": {
-    "build": "tsc && cp -r assets dist/assets",
-    "dev": "tsx --watch src/index.ts",
-    "start": "node dist/index.js",
-    "inspector": "mcp-inspector http://localhost:3000/mcp"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.20.0",
-    "express": "^5.1.0",
-    "lodash": "^4.17.21",
-    "zod": "^3.25.51"
+    "dev": "nx run-many --target dev --outputStyle tui",
+    "build": "nx run-many --target build",
+    "start": "nx run server:start"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "@modelcontextprotocol/inspector": "^0.16.2",
-    "@types/express": "^5.0.3",
-    "@types/lodash": "^4.17.20",
-    "@types/node": "^22.15.30",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
+    "nx": "^21.6.4",
     "prettier": "^3.5.3",
     "prettier-eslint": "^16.4.2",
     "tsx": "^4.19.4",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.32.0"
-  }
+  },
+  "packageManager": "pnpm@10.18.0"
 }

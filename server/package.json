@@ -1,0 +1,41 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "description": "Alpic MCP Server Template",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "mcp-server-template": "./dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --watch src/index.ts",
+    "build": "tsc && cp -r ../web/dist/assets dist",
+    "start": "node dist/index.js",
+    "inspector": "mcp-inspector http://localhost:3000/mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "express": "^5.1.0",
+    "lodash": "^4.17.21",
+    "zod": "^3.25.51"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.16.2",
+    "@types/express": "^5.0.3",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^22.15.30"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "web:build"
+        ]
+      }
+    }
+  }
+}
