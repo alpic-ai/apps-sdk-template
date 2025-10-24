@@ -94,9 +94,8 @@ This naming convention allows the system to automatically map widget requests to
 
 Use Alpic to deploy your OpenAI App to production.
 
-- Fork this repository to your personal Github organization or use it as a template to create a new project
-- Go to [Alpic](https://app.alpic.ai/), login with your Github account, and create a new project using your repository
-- Leave all default settings and click on **Deploy**. In about 30 seconds you should see your deployment status as **Deployed**
+[![Deploy on Alpic](https://assets.alpic.ai/button.svg)](https://app.alpic.ai/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Falpic-ai%2Fapps-sdk-template)
+
 - In ChatGPT, navigate to **Settings → Connectors → Create** and add your MCP server URL (e.g., `https://your-app-name.alpic.live`)
 
 ## Project Structure
