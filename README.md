@@ -94,7 +94,7 @@ This naming convention allows the system to automatically map widget requests to
 
 Use Alpic to deploy your OpenAI App to production.
 
-[![Deploy on Alpic](https://assets.alpic.ai/button.svg)](https://app.alpic.ai/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Falpic-ai%2Fapps-sdk-template)
+[![Deploy on Alpic](https://assets.alpic.ai/button.svg)](https://app.alpic.ai/new/clone?repositoryUrl=https%3A%2F%2Fgithub.com%2Falpic-ai%2Fapps-sdk-template)
 
 - In ChatGPT, navigate to **Settings → Connectors → Create** and add your MCP server URL (e.g., `https://your-app-name.alpic.live`)
 
