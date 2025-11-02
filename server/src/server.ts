@@ -22,13 +22,6 @@ server.widget(
     inputSchema: {
       name: z.string().describe("Pokemon name, always in english"),
     },
-    outputSchema: {
-      name: z.string(),
-      description: z.string(),
-      imageUrl: z.string(),
-      weightInKilograms: z.number(),
-      heightInMeters: z.number(),
-    },
   },
   async ({ name }): Promise<CallToolResult> => {
     try {
