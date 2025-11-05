@@ -70,6 +70,9 @@ Forwarding     https://3785c5ddc4b6.ngrok-free.app -> http://localhost:3000
 
 #### 6. Develop with HMR
 
+> ⚠️ Since the release of [Chrome 142](https://developer.chrome.com/blog/local-network-access#what_is_local_network_access), local network access on Chromium-based browser from website is **by default** blocked by an access permission prompt. As the widgets are being displayed within iframes, the prompt never appear. Hence, you won't see the iframe appear in ChatGPT.
+> In order to make it work, you need to go to `chrome://flags/#local-network-access-check` and disable the Local Network Access Checks.
+
 Now you can edit React components in `web` and see changes instantly:
 
 - Make changes to any component
