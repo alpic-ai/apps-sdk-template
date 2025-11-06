@@ -38,7 +38,7 @@ server.widget(
          * Structured data that is used to hydrate your component.
          * ChatGPT injects this object into your iframe as window.openai.toolOutput
          */
-        structuredContent: { name, description, ...pokemon },
+        structuredContent: { id, name, description, ...pokemon },
         /**
          * Optional free-form text that the model receives verbatim
          */
@@ -46,6 +46,10 @@ server.widget(
           {
             type: "text",
             text: description ?? `A pokemon named ${name}.`,
+          },
+          {
+            type: "text",
+            text: `Widget shown with all the information. Do not need to show the information in the text response.`,
           },
         ],
         isError: false,
