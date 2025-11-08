@@ -12,28 +12,19 @@ import PokemonAbilitiesCard from "./components/molecules/PokemonAbilitiesCard";
 import PokemonEvolutionsCard from "./components/molecules/PokemonEvolutionsCard";
 import { getTypeTheme } from "./pokemonTheme";
 import type { Pokemon } from "./types";
+import { useWidgetState } from "@/utils";
 
 function PokemonWidget() {
-  const widgetState = useOpenAiGlobal("widgetState");
-  const [currentPokemon, setCurrentPokemon] = useState<Pokemon | null>(
-    (widgetState?.currentPokemon as Pokemon | null) ?? null,
-  );
-  const fetchedPokemon = useToolOutput() as Pokemon | null;
-  const [isNavigating, setIsNavigating] = useState(false);
-
+  const fetchedPokemon = useToolOutput() as Pokemon;
+  const [{ currentPokemon }, setWidgetState] = useWidgetState<{ currentPokemon: Pokemon }>({
+    currentPokemon: fetchedPokemon,
+  });
   useEffect(() => {
-    if (fetchedPokemon) {
-      setCurrentPokemon(fetchedPokemon);
+    if (currentPokemon === null && fetchedPokemon !== null) {
+      setWidgetState({ currentPokemon: fetchedPokemon });
     }
-  }, [fetchedPokemon]);
-
-  useEffect(() => {
-    window.openai?.setWidgetState({
-      state: {
-        currentPokemon,
-      },
-    });
-  }, [currentPokemon]);
+  }, [fetchedPokemon, currentPokemon, setWidgetState]);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const displayMode = useOpenAiGlobal("displayMode");
   const isFullscreen = displayMode === "fullscreen";
@@ -41,21 +32,26 @@ function PokemonWidget() {
     window.openai?.requestDisplayMode({ mode: isFullscreen ? "inline" : "fullscreen" });
   }, [isFullscreen]);
 
-  const handleEvolutionClick = useCallback(async (name: string) => {
-    try {
-      setIsNavigating(true);
-      const newPokemon = (await window.openai?.callTool("pokemon", { name })) as unknown as {
-        structuredContent?: Pokemon;
-      };
-      if (newPokemon?.structuredContent) {
-        setCurrentPokemon(newPokemon.structuredContent);
+  const handleEvolutionClick = useCallback(
+    async (name: string) => {
+      try {
+        setIsNavigating(true);
+        const newPokemon = (await window.openai?.callTool("pokemon", { name })) as unknown as {
+          structuredContent?: Pokemon;
+        };
+        if (newPokemon?.structuredContent) {
+          setWidgetState({
+            currentPokemon: newPokemon.structuredContent,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to load evolution", error);
+      } finally {
+        setIsNavigating(false);
       }
-    } catch (error) {
-      console.error("Failed to load evolution", error);
-    } finally {
-      setIsNavigating(false);
-    }
-  }, []);
+    },
+    [setWidgetState],
+  );
 
   const handleNavigate = useCallback(
     async (step: number) => {
@@ -81,7 +77,7 @@ function PokemonWidget() {
         };
 
         if (result?.structuredContent) {
-          setCurrentPokemon(result.structuredContent);
+          setWidgetState({ currentPokemon: result.structuredContent });
         }
       } catch (error) {
         console.error("Failed to navigate to pokemon", error);
@@ -89,7 +85,7 @@ function PokemonWidget() {
         setIsNavigating(false);
       }
     },
-    [currentPokemon, isNavigating],
+    [currentPokemon, isNavigating, setWidgetState],
   );
 
   const primaryType = currentPokemon?.types?.[0]?.id ?? "normal";
@@ -118,7 +114,7 @@ function PokemonWidget() {
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
             <span className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-slate-500">
-              Pokédex Entry
+              Pokemon
             </span>
             <span className="text-lg font-bold text-slate-800">{formattedOrder}</span>
           </div>

@@ -79,8 +79,6 @@ export const getPokemon = async (name: string) => {
     throw new Error(`Pokemon ${name} not found`);
   }
 
-  console.log({ text: JSON.stringify(pokemon.pokemonspecy.pokemonspeciesflavortexts, null, 2) });
-
   return {
     id: pokemon.id,
     color: pokemon.pokemonspecy.pokemoncolor.name,
