@@ -7,11 +7,10 @@ import { ChevronLeft, ChevronRight, Ruler, Weight } from "lucide-react";
 type PokemonHeroCardProps = {
   pokemon: Pokemon;
   theme: TypeTheme;
-  isNavigating: boolean;
   onNavigate: (step: number) => void;
 };
 
-const PokemonHeroCard = ({ pokemon, theme, isNavigating, onNavigate }: PokemonHeroCardProps) => {
+const PokemonHeroCard = ({ pokemon, theme, onNavigate }: PokemonHeroCardProps) => {
   const heightMeters = `${pokemon.heightInMeters.toFixed(1)} m`;
   const weightKilograms = `${pokemon.weightInKilograms.toFixed(1)} kg`;
 
@@ -49,7 +48,6 @@ const PokemonHeroCard = ({ pokemon, theme, isNavigating, onNavigate }: PokemonHe
             onClick={() => {
               onNavigate(-1);
             }}
-            disabled={isNavigating}
             accentTextClass={theme.accentText}
             className="shadow-md"
           />
@@ -68,7 +66,6 @@ const PokemonHeroCard = ({ pokemon, theme, isNavigating, onNavigate }: PokemonHe
             onClick={() => {
               onNavigate(1);
             }}
-            disabled={isNavigating}
             accentTextClass={theme.accentText}
             className="shadow-md"
           />
