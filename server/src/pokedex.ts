@@ -44,6 +44,7 @@ export const getPokemon = async (name: string) => {
             evolutionchain {
               pokemonspecies {
                 pokemons(where: {is_default: {_eq: true}}) {
+                  id
                   name
                   order
                   pokemonsprites {
@@ -84,7 +85,7 @@ export const getPokemon = async (name: string) => {
     order: pokemon.order,
     heightInMeters: pokemon.height / 10,
     weightInKilograms: pokemon.weight / 10,
-    imageUrl: pokemon.pokemonsprites[0].sprites.front_default,
+    imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`,
     description: pokemon.pokemonspecy.pokemonspeciesflavortexts[0]?.flavor_text
       .replace(/\n/g, " ")
       .replace(/\.(?![^.]*$)/g, ". "),
@@ -114,11 +115,18 @@ export const getPokemon = async (name: string) => {
       ({
         pokemons: [pokemon],
       }: {
-        pokemons: { name: string; order: number; pokemonsprites: { sprites: { front_default: string } }[] }[];
+        pokemons: {
+          id: number;
+          name: string;
+          order: number;
+          pokemonsprites: { sprites: { front_default: string } }[];
+        }[];
       }) => ({
-        id: pokemon.name,
+        id: pokemon.id,
+        name: pokemon.name,
         order: pokemon.order,
-        imageUrl: pokemon.pokemonsprites[0].sprites.front_default,
+        imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`,
+        isCurrent: pokemon.name === name.toLowerCase(),
       }),
     ),
   };
