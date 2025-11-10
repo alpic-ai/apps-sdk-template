@@ -104,7 +104,7 @@ function PokemonWidget() {
 
   return (
     <div className={`relative w-full rounded-3xl ${theme.gradient} shadow-2xl`}>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.6),_transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.6),transparent_70%)]" />
       {isNavigating ? (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/60 backdrop-blur-sm">
           <Spinner />
@@ -113,9 +113,7 @@ function PokemonWidget() {
       <div className="relative flex flex-col gap-6 p-6 lg:p-8">
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
-            <span className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-slate-500">
-              Pokemon
-            </span>
+            <span className="text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-slate-500">Pokemon</span>
             <span className="text-lg font-bold text-slate-800">{formattedOrder}</span>
           </div>
           <Button
