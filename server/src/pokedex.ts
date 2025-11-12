@@ -72,6 +72,10 @@ export const getPokemon = async (name: string) => {
     }),
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to fetch pokemon ${name}: ${response.status} ${await response.text()}`);
+  }
+
   const result = await response.json();
   const pokemon = result.data.pokemon[0];
 
