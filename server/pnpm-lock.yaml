@@ -24,8 +24,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       skybridge:
-        specifier: 0.1.0
-        version: 0.1.0(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6)
+        specifier: 0.2.0
+        version: 0.2.0(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6)
       vite:
         specifier: ^7.1.11
         version: 7.1.11(@types/node@22.18.12)(tsx@4.20.6)
@@ -1546,8 +1546,8 @@ packages:
     resolution: {integrity: sha512-a2B9Y0KlNXl9u/vsW6sTIu9vGEpfKu2wRV6l1H3XEas/0gUIzGzBoP/IouTcUQbm9JWZLH3COxyn03TYlFax6w==}
     engines: {node: '>=10'}
 
-  skybridge@0.1.0:
-    resolution: {integrity: sha512-PYzshs38aKeN0UAKuC2fNMWP6o8I2QhUgpe3/2hK/C9+bqqj3eOAcKMNfixP6/ProTLCMcNmqf+Of9BiCKBPrg==}
+  skybridge@0.2.0:
+    resolution: {integrity: sha512-RRRSGTwEpavGq65zkScfuIScUyHFnr2DWe10+OghaiPCgHuBheszsQJVeDWWQrOOrXCiizMYV7zyg3pxNxW11w==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -3177,7 +3177,7 @@ snapshots:
     dependencies:
       semver: 7.7.3
 
-  skybridge@0.1.0(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6):
+  skybridge@0.2.0(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6):
     dependencies:
       '@modelcontextprotocol/sdk': 1.20.1
       cors: 2.8.5

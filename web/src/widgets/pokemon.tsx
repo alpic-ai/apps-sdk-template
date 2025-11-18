@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import "@/index.css";
 import { Maximize2Icon, Minimize2Icon } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
-import { mountWidget, useOpenAiGlobal, useToolOutput } from "skybridge/web";
+import { mountWidget, useCallTool, useOpenAiGlobal, useToolOutput, type CallToolResponse } from "skybridge/web";
 
 import PokemonHeroCard from "./components/molecules/PokemonHeroCard";
 import PokemonStatsCard from "./components/molecules/PokemonStatsCard";
@@ -24,7 +24,6 @@ function PokemonWidget() {
       setWidgetState({ currentPokemon: fetchedPokemon });
     }
   }, [fetchedPokemon, currentPokemon, setWidgetState]);
-  const [isNavigating, setIsNavigating] = useState(false);
 
   const displayMode = useOpenAiGlobal("displayMode");
   const isFullscreen = displayMode === "fullscreen";
@@ -32,61 +31,35 @@ function PokemonWidget() {
     window.openai?.requestDisplayMode({ mode: isFullscreen ? "inline" : "fullscreen" });
   }, [isFullscreen]);
 
-  const handleEvolutionClick = useCallback(
-    async (name: string) => {
-      try {
-        setIsNavigating(true);
-        const newPokemon = (await window.openai?.callTool("pokemon", { name })) as unknown as {
-          structuredContent?: Pokemon;
-        };
-        if (newPokemon?.structuredContent) {
-          setWidgetState({
-            currentPokemon: newPokemon.structuredContent,
-          });
-        }
-      } catch (error) {
-        console.error("Failed to load evolution", error);
-      } finally {
-        setIsNavigating(false);
-      }
-    },
-    [setWidgetState],
-  );
+  const {
+    callTool: callPokemonTool,
+    callToolAsync: callPokemonToolAsync,
+    isPending,
+  } = useCallTool<{ name: string }, CallToolResponse & { structuredContent: Pokemon }>("pokemon");
 
-  const handleNavigate = useCallback(
-    async (step: number) => {
-      if (!currentPokemon || isNavigating) {
-        return;
+  const handleNavigate = async (step: number) => {
+    if (!currentPokemon) {
+      return;
+    }
+
+    const nextOrder = currentPokemon.id + step;
+    if (nextOrder < 1) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nextOrder}`);
+      if (!response.ok) {
+        throw new Error(`Unable to find pokemon with id ${nextOrder}`);
       }
 
-      const nextOrder = currentPokemon.id + step;
-      if (nextOrder < 1) {
-        return;
-      }
-
-      try {
-        setIsNavigating(true);
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nextOrder}`);
-        if (!response.ok) {
-          throw new Error(`Unable to find pokemon with id ${nextOrder}`);
-        }
-
-        const data = (await response.json()) as { name: string };
-        const result = (await window.openai?.callTool("pokemon", { name: data.name })) as unknown as {
-          structuredContent?: Pokemon;
-        };
-
-        if (result?.structuredContent) {
-          setWidgetState({ currentPokemon: result.structuredContent });
-        }
-      } catch (error) {
-        console.error("Failed to navigate to pokemon", error);
-      } finally {
-        setIsNavigating(false);
-      }
-    },
-    [currentPokemon, isNavigating, setWidgetState],
-  );
+      const data = (await response.json()) as { name: string };
+      const { structuredContent } = await callPokemonToolAsync({ name: data.name });
+      setWidgetState({ currentPokemon: structuredContent });
+    } catch (error) {
+      console.error("Failed to navigate to pokemon", error);
+    }
+  };
 
   const primaryType = currentPokemon?.types?.[0]?.id ?? "normal";
   const theme = useMemo(() => getTypeTheme(primaryType), [primaryType]);
@@ -105,7 +78,7 @@ function PokemonWidget() {
   return (
     <div className={`relative w-full rounded-3xl ${theme.gradient} shadow-2xl`}>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.6),transparent_70%)]" />
-      {isNavigating ? (
+      {isPending ? (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/60 backdrop-blur-sm">
           <Spinner />
         </div>
@@ -129,7 +102,7 @@ function PokemonWidget() {
         <PokemonHeroCard
           pokemon={currentPokemon}
           theme={theme}
-          isNavigating={isNavigating}
+          isNavigating={isPending}
           onNavigate={(step) => {
             void handleNavigate(step);
           }}
@@ -148,7 +121,14 @@ function PokemonWidget() {
           evolutions={evolutions}
           theme={theme}
           onSelect={(name) => {
-            void handleEvolutionClick(name);
+            callPokemonTool(
+              { name },
+              {
+                onSuccess: (response) => {
+                  setWidgetState({ currentPokemon: response.structuredContent });
+                },
+              },
+            );
           }}
         />
       </div>
