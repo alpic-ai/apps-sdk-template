@@ -6,7 +6,7 @@ This repository is a minimal Typescript application demonstrating how to build a
 
 ## Overview
 
-This project shows how to integrate a Typescript express application with the ChatGPT Apps SDK using the Model Context Protocol (MCP). It includes a working MCP server that exposes tools and resources that can be called from ChatGPT, with responses rendered natively in ChatGPT. It also includes MCP tools without UI widget.
+This project shows how to integrate a Typescript express application with the ChatGPT Apps SDK using the Model Context Protocol (MCP). It includes a working MCP server that exposes tools and resources that can be called from ChatGPT, with responses rendered natively in ChatGPT. It also includes MCP tools without UI widgets.
 
 ## Getting Started
 
@@ -36,10 +36,10 @@ Run the development server from the root directory:
 pnpm dev
 ```
 
-This command starts an express server on port 3000. This server packages:
+This command starts an Express server on port 3000. This server packages:
 
-- an MCP endpoint on `/mcp` - aka as the ChatGPT App Backend
-- a React application on Vite HMR dev server - aka as the ChatGPT App Frontend
+- an MCP endpoint on `/mcp` - aka the ChatGPT App Backend
+- a React application on Vite HMR dev server - aka the ChatGPT App Frontend
 
 #### 3. Expose Your Local Server
 
@@ -57,7 +57,7 @@ Forwarding     https://3785c5ddc4b6.ngrok-free.app -> http://localhost:3000
 
 #### 4. Connect to ChatGPT
 
-- Toggle **Settings → Connectors → Advanced → Developer mode** in the ChatGPT client
+- Enable **Settings → Connectors → Advanced → Developer mode** in the ChatGPT client
 - Navigate to **Settings → Connectors → Create**
 - Enter your ngrok URL with the `/mcp` path (e.g., `https://3785c5ddc4b6.ngrok-free.app/mcp`)
 - Click **Create**
@@ -65,7 +65,7 @@ Forwarding     https://3785c5ddc4b6.ngrok-free.app -> http://localhost:3000
 #### 5. Test Your Integration
 
 - Start a new conversation in ChatGPT
-- Select your newly created connector using **+ → Plus → Your connector**
+- Select your newly created connector using **the + button → Your connector**
 - Try prompting the model (e.g., "Show me pikachu details")
 
 #### 6. Develop with HMR
@@ -77,7 +77,7 @@ Now you can edit React components in `web` and see changes instantly:
 - The widget will automatically update in ChatGPT without refreshing or reconnecting
 - The Express server and MCP server continue running without interruption
 
-**Note:** When you modify widget components, changes will reflect immediately. If you modify MCP server code (in `src/`), you may need to reload your connector in **Settings → Connectors → [Your connector] → Reload**.
+**Note:** When you modify widget components, changes will be reflected immediately. If you modify MCP server code (in `src/`), you may need to reload your connector in **Settings → Connectors → [Your connector] → Reload**.
 
 ## Widget Naming Convention
 

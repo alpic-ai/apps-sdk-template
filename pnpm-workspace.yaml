@@ -2,3 +2,6 @@ packages:
   - "web"
   - "server"
 sharedWorkspaceLockfile: false
+
+catalog:
+  skybridge: ^0.4.0

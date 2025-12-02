@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    skybridge:
+      specifier: ^0.4.0
+      version: 0.4.0
+
 importers:
 
   .:
@@ -27,8 +33,8 @@ importers:
         specifier: ^19.1.1
         version: 19.2.0(react@19.2.0)
       skybridge:
-        specifier: ^0.1.0
-        version: 0.1.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 'catalog:'
+        version: 0.4.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -1571,8 +1577,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  skybridge@0.1.0:
-    resolution: {integrity: sha512-PYzshs38aKeN0UAKuC2fNMWP6o8I2QhUgpe3/2hK/C9+bqqj3eOAcKMNfixP6/ProTLCMcNmqf+Of9BiCKBPrg==}
+  skybridge@0.4.0:
+    resolution: {integrity: sha512-or//T7KbRlSBnWwPKDVrs809RZZNjq9eEsNOAxX4+tDR/3PxOvUCZVaRWLlu+6EZY4lrBTxJ25HhYOpUcGjNxg==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -3223,7 +3229,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  skybridge@0.1.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  skybridge@0.4.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@modelcontextprotocol/sdk': 1.20.1
       cors: 2.8.5
