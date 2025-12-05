@@ -72,7 +72,40 @@ export const getPokemon = async (name: string) => {
   });
 
   const result = await response.json();
-  const pokemon = result.data.pokemon[0];
+  const pokemon = result.data.pokemon[0] as {
+    id: number;
+    order: number;
+    height: number;
+    weight: number;
+    pokemonspecy: {
+      pokemoncolor: { name: string };
+      pokemonspeciesflavortexts: { flavor_text: string }[];
+      evolutionchain: {
+        pokemonspecies: {
+          pokemons: {
+            name: string;
+            order: number;
+            pokemonsprites: { sprites: { front_default: string } }[];
+          }[];
+        }[];
+      };
+    };
+    pokemonsprites: { sprites: { front_default: string } }[];
+    pokemonstats: {
+      base_stat: number;
+      stat: { name: string; statnames: { name: string }[] };
+    }[];
+    pokemontypes: {
+      type: { name: string; typenames: { name: string }[] };
+    }[];
+    pokemonabilities: {
+      ability: {
+        name: string;
+        abilitynames: { name: string }[];
+        abilityflavortexts: { flavor_text: string }[];
+      };
+    }[];
+  } | null;
 
   if (!pokemon) {
     throw new Error(`Pokemon ${name} not found`);
@@ -88,38 +121,26 @@ export const getPokemon = async (name: string) => {
     description: pokemon.pokemonspecy.pokemonspeciesflavortexts[0]?.flavor_text
       .replace(/\n/g, " ")
       .replace(/\.(?![^.]*$)/g, ". "),
-    stats: pokemon.pokemonstats.map(
-      (stat: { stat: { name: string; statnames: { name: string }[] }; base_stat: number }) => ({
-        id: stat.stat.name,
-        name: stat.stat.statnames[0].name,
-        value: stat.base_stat,
-      }),
-    ),
-    types: pokemon.pokemontypes.map((type: { type: { name: string; typenames: { name: string }[] } }) => ({
+    stats: pokemon.pokemonstats.map((stat) => ({
+      id: stat.stat.name,
+      name: stat.stat.statnames[0].name,
+      value: stat.base_stat,
+    })),
+    types: pokemon.pokemontypes.map((type) => ({
       id: type.type.name,
       name: type.type.typenames[0].name,
     })),
-    abilities: pokemon.pokemonabilities.map(
-      (ability: {
-        ability: { name: string; abilitynames: { name: string }[]; abilityflavortexts: { flavor_text: string }[] };
-      }) => ({
-        id: ability.ability.name,
-        name: ability.ability.abilitynames[0].name,
-        description: ability.ability.abilityflavortexts[0]?.flavor_text
-          .replace(/\n/g, " ")
-          .replace(/\.(?![^.]*$)/g, ". "),
-      }),
-    ),
-    evolutions: pokemon.pokemonspecy.evolutionchain.pokemonspecies.map(
-      ({
-        pokemons: [pokemon],
-      }: {
-        pokemons: { name: string; order: number; pokemonsprites: { sprites: { front_default: string } }[] }[];
-      }) => ({
-        id: pokemon.name,
-        order: pokemon.order,
-        imageUrl: pokemon.pokemonsprites[0].sprites.front_default,
-      }),
-    ),
+    abilities: pokemon.pokemonabilities.map((ability) => ({
+      id: ability.ability.name,
+      name: ability.ability.abilitynames[0].name,
+      description: ability.ability.abilityflavortexts[0]?.flavor_text
+        .replace(/\n/g, " ")
+        .replace(/\.(?![^.]*$)/g, ". "),
+    })),
+    evolutions: pokemon.pokemonspecy.evolutionchain.pokemonspecies.map(({ pokemons: [pokemon] }) => ({
+      id: pokemon.name,
+      order: pokemon.order,
+      imageUrl: pokemon.pokemonsprites[0].sprites.front_default,
+    })),
   };
 };

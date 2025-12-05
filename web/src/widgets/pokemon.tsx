@@ -1,35 +1,8 @@
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import "@/index.css";
 
-import { mountWidget, useToolOutput } from "skybridge/web";
-
-type Pokemon = {
-  name: string;
-  color: string;
-  description: string;
-  order: number;
-  imageUrl: string;
-  weightInKilograms: number;
-  heightInMeters: number;
-  types: {
-    id: string;
-    name: string;
-  }[];
-  abilities: {
-    id: string;
-    name: string;
-    description: string;
-  }[];
-  evolutions: {
-    id: string;
-    order: number;
-    imageUrl: string;
-  }[];
-  stats: {
-    name: string;
-    value: number;
-  }[];
-};
+import { mountWidget } from "skybridge/web";
+import { useCallTool, useToolInfo } from "../helpers";
 
 const typesSvgs = {
   bug: "https://raw.githubusercontent.com/partywhale/pokemon-type-icons/refs/heads/main/icons/bug.svg",
@@ -137,7 +110,11 @@ const typesToClassnames: Record<
 };
 
 function Pokemon() {
-  const pokemon = useToolOutput() as Pokemon | null;
+  const toolInfo = useToolInfo<"pokemon">();
+
+  const pokemon = toolInfo.output ?? null;
+
+  const { callTool: captureTool } = useCallTool("capture");
 
   if (!pokemon) {
     return (
@@ -166,6 +143,12 @@ function Pokemon() {
             </div>
           </div>
           <p className="text-gray-500">{pokemon.description}</p>
+          <button
+            onClick={() => captureTool({})}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Capture Pokemon
+          </button>
         </Tile>
       </div>
     </div>
