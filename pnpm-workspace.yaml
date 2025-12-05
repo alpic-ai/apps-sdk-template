@@ -4,4 +4,4 @@ packages:
 sharedWorkspaceLockfile: false
 
 catalog:
-  skybridge: ^0.8.2
+  skybridge: ^0.9.2
