@@ -10,7 +10,7 @@ const server = new McpServer(
   },
   { capabilities: {} },
 )
-  .widget(
+  .registerWidget(
     "pokemon",
     {
       description: "Pokedex entry for a pokemon",
