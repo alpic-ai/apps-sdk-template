@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     skybridge:
-      specifier: ^0.9.2
-      version: 0.9.2
+      specifier: ^0.9.4
+      version: 0.9.4
 
 importers:
 
@@ -31,7 +31,7 @@ importers:
         version: 4.17.21
       skybridge:
         specifier: 'catalog:'
-        version: 0.9.2(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6)
+        version: 0.9.4(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6)
       vite:
         specifier: ^7.1.11
         version: 7.1.11(@types/node@22.18.12)(tsx@4.20.6)
@@ -1670,8 +1670,8 @@ packages:
     resolution: {integrity: sha512-a2B9Y0KlNXl9u/vsW6sTIu9vGEpfKu2wRV6l1H3XEas/0gUIzGzBoP/IouTcUQbm9JWZLH3COxyn03TYlFax6w==}
     engines: {node: '>=10'}
 
-  skybridge@0.9.2:
-    resolution: {integrity: sha512-nmnya6zoYWcS31/FhznQrXm0RdMHNG0HABsWCrxlAIFNuHVW7R3DsEYFq1jg/oSu0waQSFatBdFEGnAj0OJMyA==}
+  skybridge@0.9.4:
+    resolution: {integrity: sha512-wATucQsA30tGBLzMiciMM32piyeKWPIKx0p8ouLfksFemJ07UmqlEVA6rjtPKbQBbmNO/psN8KaLKxIWSXS+lg==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -3455,7 +3455,7 @@ snapshots:
     dependencies:
       semver: 7.7.3
 
-  skybridge@0.9.2(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6):
+  skybridge@0.9.4(@types/node@22.18.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tsx@4.20.6):
     dependencies:
       '@babel/core': 7.28.5
       '@modelcontextprotocol/sdk': 1.20.1
