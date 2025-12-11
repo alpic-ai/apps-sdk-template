@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     skybridge:
-      specifier: ^0.9.4
-      version: 0.9.4
+      specifier: ^0.11.1
+      version: 0.11.1
 
 importers:
 
@@ -34,7 +34,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       skybridge:
         specifier: 'catalog:'
-        version: 0.9.4(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 0.11.1(@modelcontextprotocol/sdk@1.20.1)(@types/node@24.9.1)(@types/react@19.2.2)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -867,6 +867,10 @@ packages:
     resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
     engines: {node: '>= 0.6'}
 
+  copy-anything@4.0.5:
+    resolution: {integrity: sha512-7Vv6asjS4gMOuILabD3l739tsaxFQmC+a7pLZm02zyvs8p977bL3zEgq3yDk5rn9B0PbYgIv++jmHcuUab4RhA==}
+    engines: {node: '>=18'}
+
   cors@2.8.5:
     resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
     engines: {node: '>= 0.10'}
@@ -1209,6 +1213,10 @@ packages:
 
   is-promise@4.0.0:
     resolution: {integrity: sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==}
+
+  is-what@5.5.0:
+    resolution: {integrity: sha512-oG7cgbmg5kLYae2N5IVd3jm2s+vldjxJzK1pcu9LfpGuQ93MQSzo0okvRna+7y5ifrD+20FE8FvjusyGaz14fw==}
+    engines: {node: '>=18'}
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
@@ -1602,9 +1610,10 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  skybridge@0.9.4:
-    resolution: {integrity: sha512-wATucQsA30tGBLzMiciMM32piyeKWPIKx0p8ouLfksFemJ07UmqlEVA6rjtPKbQBbmNO/psN8KaLKxIWSXS+lg==}
+  skybridge@0.11.1:
+    resolution: {integrity: sha512-oCnxn519Y/DsEcpoX+gdleXb4doKHS2YyWDTlHdzfk7myrfQMCMC4I8TpV4Ia3xJa8DaY6c0eaH8At66FAhwWQ==}
     peerDependencies:
+      '@modelcontextprotocol/sdk': '>=1.0.0'
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
@@ -1643,6 +1652,10 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  superjson@2.2.6:
+    resolution: {integrity: sha512-H+ue8Zo4vJmV2nRjpx86P35lzwDT3nItnIsocgumgr0hHMQ+ZGq5vrERg9kJBo5AWGmxZDhzDo+WVIJqkB0cGA==}
+    engines: {node: '>=16'}
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -1801,6 +1814,24 @@ packages:
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+
+  zustand@5.0.9:
+    resolution: {integrity: sha512-ALBtUj0AfjJt3uNRQoL1tL2tMvj6Gp/6e39dnfT6uzpelGru8v1tPOGBzayOWbPJvujM8JojDk3E1LxeFisBNg==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
+        optional: true
 
 snapshots:
 
@@ -2568,6 +2599,10 @@ snapshots:
 
   cookie@0.7.2: {}
 
+  copy-anything@4.0.5:
+    dependencies:
+      is-what: 5.5.0
+
   cors@2.8.5:
     dependencies:
       object-assign: 4.1.1
@@ -2951,6 +2986,8 @@ snapshots:
 
   is-promise@4.0.0: {}
 
+  is-what@5.5.0: {}
+
   isexe@2.0.0: {}
 
   jackspeak@4.1.1:
@@ -3314,7 +3351,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  skybridge@0.9.4(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  skybridge@0.11.1(@modelcontextprotocol/sdk@1.20.1)(@types/node@24.9.1)(@types/react@19.2.2)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@babel/core': 7.28.5
       '@modelcontextprotocol/sdk': 1.20.1
@@ -3323,10 +3360,13 @@ snapshots:
       handlebars: 4.7.8
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
+      superjson: 2.2.6
       vite: 7.1.11(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)
-      zod: 3.25.76
+      zustand: 5.0.9(@types/react@19.2.2)(react@19.2.0)
     transitivePeerDependencies:
       - '@types/node'
+      - '@types/react'
+      - immer
       - jiti
       - less
       - lightningcss
@@ -3337,6 +3377,7 @@ snapshots:
       - supports-color
       - terser
       - tsx
+      - use-sync-external-store
       - yaml
 
   source-map-js@1.2.1: {}
@@ -3368,6 +3409,10 @@ snapshots:
       ansi-regex: 6.2.2
 
   strip-json-comments@3.1.1: {}
+
+  superjson@2.2.6:
+    dependencies:
+      copy-anything: 4.0.5
 
   supports-color@7.2.0:
     dependencies:
@@ -3483,3 +3528,8 @@ snapshots:
       zod: 3.25.76
 
   zod@3.25.76: {}
+
+  zustand@5.0.9(@types/react@19.2.2)(react@19.2.0):
+    optionalDependencies:
+      '@types/react': 19.2.2
+      react: 19.2.0
