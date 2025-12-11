@@ -1,4 +1,3 @@
-import { type CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { getPokemon } from "./pokedex.js";
 import { z } from "zod";
 import { McpServer } from "skybridge/server";
