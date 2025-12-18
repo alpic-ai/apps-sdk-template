@@ -3,6 +3,7 @@ import "@/index.css";
 
 import { mountWidget } from "skybridge/web";
 import { useCallTool, useToolInfo } from "../helpers";
+import { I18nProvider, useTypedIntl } from "@/i18n";
 
 const typesSvgs = {
   bug: "https://raw.githubusercontent.com/partywhale/pokemon-type-icons/refs/heads/main/icons/bug.svg",
@@ -110,6 +111,7 @@ const typesToClassnames: Record<
 };
 
 function Pokemon() {
+  const { t } = useTypedIntl()
   const toolInfo = useToolInfo<"pokemon">();
 
   const pokemon = toolInfo.output ?? null;
@@ -147,7 +149,7 @@ function Pokemon() {
             onClick={() => captureTool({})}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
           >
-            Capture Pokemon
+            {t("pokemon.capture")}
           </button>
         </Tile>
       </div>
@@ -161,4 +163,8 @@ const Tile = ({ children, color }: { children: React.ReactNode; color: string })
 
 export default Pokemon;
 
-mountWidget(<Pokemon />);
+mountWidget(
+  <I18nProvider>
+    <Pokemon />
+  </I18nProvider>
+);
