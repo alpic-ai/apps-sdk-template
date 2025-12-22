@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     skybridge:
-      specifier: ^0.11.1
-      version: 0.11.1
+      specifier: ^0.13.1
+      version: 0.13.1
 
 importers:
 
@@ -34,7 +34,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       skybridge:
         specifier: 'catalog:'
-        version: 0.11.1(@modelcontextprotocol/sdk@1.20.1)(@types/node@24.9.1)(@types/react@19.2.2)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 0.13.1(@modelcontextprotocol/sdk@1.20.1)(@types/node@24.9.1)(@types/react@19.2.2)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -1610,8 +1610,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  skybridge@0.11.1:
-    resolution: {integrity: sha512-oCnxn519Y/DsEcpoX+gdleXb4doKHS2YyWDTlHdzfk7myrfQMCMC4I8TpV4Ia3xJa8DaY6c0eaH8At66FAhwWQ==}
+  skybridge@0.13.1:
+    resolution: {integrity: sha512-+1Exh0K1VGFx+K9b1XIhhP6C4jSFcKVmFxYgbXvJdwdcsVu83KN9Ir9yRnd3vjOUJCoJJuwmbwoHaI8QsEgL5w==}
     peerDependencies:
       '@modelcontextprotocol/sdk': '>=1.0.0'
       react: '>=18.0.0'
@@ -3351,7 +3351,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  skybridge@0.11.1(@modelcontextprotocol/sdk@1.20.1)(@types/node@24.9.1)(@types/react@19.2.2)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  skybridge@0.13.1(@modelcontextprotocol/sdk@1.20.1)(@types/node@24.9.1)(@types/react@19.2.2)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@babel/core': 7.28.5
       '@modelcontextprotocol/sdk': 1.20.1
