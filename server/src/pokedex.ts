@@ -137,10 +137,12 @@ export const getPokemon = async (name: string) => {
         .replace(/\n/g, " ")
         .replace(/\.(?![^.]*$)/g, ". "),
     })),
-    evolutions: pokemon.pokemonspecy.evolutionchain.pokemonspecies.map(({ pokemons: [pokemon] }) => ({
-      id: pokemon.name,
-      order: pokemon.order,
-      imageUrl: pokemon.pokemonsprites[0].sprites.front_default,
-    })),
+    evolutions: pokemon.pokemonspecy.evolutionchain.pokemonspecies.map(
+      ({ pokemons: [pokemon] }) => ({
+        id: pokemon.name,
+        order: pokemon.order,
+        imageUrl: pokemon.pokemonsprites[0].sprites.front_default,
+      }),
+    ),
   };
 };
