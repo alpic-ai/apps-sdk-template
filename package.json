@@ -16,12 +16,7 @@
     "web:preview": "pnpm --filter @apps-sdk-template/web preview"
   },
   "devDependencies": {
-    "@eslint/js": "^9.18.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^5.2.2",
-    "prettier": "^3.5.3",
-    "prettier-eslint": "^16.4.2",
-    "tsx": "^4.19.4",
-    "typescript-eslint": "^8.32.0"
+    "@biomejs/biome": "2.3.8",
+    "tsx": "^4.19.4"
   }
 }
