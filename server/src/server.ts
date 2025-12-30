@@ -1,6 +1,6 @@
-import { getPokemon } from "./pokedex.js";
-import { z } from "zod";
 import { McpServer } from "skybridge/server";
+import { z } from "zod";
+import { getPokemon } from "./pokedex.js";
 
 const server = new McpServer(
   {
@@ -64,7 +64,9 @@ const server = new McpServer(
     },
     async () => {
       return {
-        content: [{ type: "text", text: `Great job, you've captured a new pokemon!` }],
+        content: [
+          { type: "text", text: `Great job, you've captured a new pokemon!` },
+        ],
         isError: false,
       };
     },

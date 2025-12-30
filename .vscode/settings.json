@@ -1,20 +1,8 @@
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.organizeImports.biome": "explicit",
+    "quickfix.biome": "explicit"
   },
-  "prettier.requireConfig": true,
-  "eslint.format.enable": true,
-  "prettier.resolveGlobalModules": true,
-  "prettier.useEditorConfig": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  "editor.defaultFormatter": "biomejs.biome"
 }
