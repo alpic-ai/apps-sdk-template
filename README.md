@@ -1,34 +1,28 @@
-# ChatGPT Apps SDK Alpic Starter
+# Apps SDK Template
 
-This repository is a minimal Typescript application demonstrating how to build an OpenAI Apps SDK compatible MCP server with widget rendering in ChatGPT.
+A minimal TypeScript template for building ChatGPT and MCP Apps with widget rendering.
 
-![Demo](docs/demo.gif)
-
-## Overview
-
-This project shows how to integrate a Typescript express application with the ChatGPT Apps SDK using the Model Context Protocol (MCP). It includes a working MCP server that exposes tools and resources that can be called from ChatGPT, with responses rendered natively in ChatGPT. It also includes MCP tools without UI widgets.
+**This template has been generated and is powered by [Skybridge](https://github.com/alpic-ai/skybridge).**
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 22+ (see `.nvmrc` for exact version)
-- pnpm (install with `npm install -g pnpm`)
-- Ngrok
+- Node.js 24+
+- pnpm (install with npm install -g pnpm)
+- HTTP tunnel such as [ngrok](https://ngrok.com/download)
 
-### Local Development with Hot Module Replacement (HMR)
+### Local Development
 
-This project uses Vite for React widget development with full HMR support, allowing you to see changes in real-time, directly within ChatGPT conversation, without restarting the server.
-
-#### 1. Clone and Install
+#### 1. Install
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:alpic-ai/apps-sdk-template.git
 cd apps-sdk-template
 pnpm install
 ```
 
-#### 2. Start the Development Server
+#### 2. Start your local server
 
 Run the development server from the root directory:
 
@@ -36,83 +30,43 @@ Run the development server from the root directory:
 pnpm dev
 ```
 
-This command starts an Express server on port 3000. This server packages:
+Open DevTools to test your app locally: http://localhost:3000/
+MCP server running at:  http://localhost:3000/mcp
 
-- an MCP endpoint on `/mcp` - aka the ChatGPT App Backend
-- a React application on Vite HMR dev server - aka the ChatGPT App Frontend
+#### 3. Connect to ChatGPT
 
-#### 3. Expose Your Local Server
-
-In a separate terminal, expose your local server using ngrok:
-
+- ChatGPT requires connectors to be publicly accessible. To expose your server on the Internet, run:
 ```bash
 ngrok http 3000
 ```
+- In ChatGPT, navigate to **Settings → Connectors → Create** and add the forwarding URL provided by ngrok suffixed with `/mcp` (e.g. `https://3785c5ddc4b6.ngrok-free.app/mcp`)
 
-Copy the forwarding URL from ngrok output:
+### Create your first widget
 
-```bash
-Forwarding     https://3785c5ddc4b6.ngrok-free.app -> http://localhost:3000
-```
+#### 1. Add a new widget
 
-#### 4. Connect to ChatGPT
+- Register a widget in `server/server.ts` with a unique name (e.g., `my-widget`)
+- Create a matching React component at `web/src/widgets/my-widget.tsx`. The file name must match the widget name exactly
 
-- Enable **Settings → Connectors → Advanced → Developer mode** in the ChatGPT client
-- Navigate to **Settings → Connectors → Create**
-- Enter your ngrok URL with the `/mcp` path (e.g., `https://3785c5ddc4b6.ngrok-free.app/mcp`)
-- Click **Create**
+#### 2. Edit widgets with Hot Module Replacement (HMR)
 
-#### 5. Test Your Integration
+Edit and save components in `web/src/widgets/` — changes appear instantly in the host
 
-- Start a new conversation in ChatGPT
-- Select your newly created connector using **the + button → Your connector**
-- Try prompting the model (e.g., "Show me pikachu details")
+#### 3. Edit server code
 
-#### 6. Develop with HMR
-
-Now you can edit React components in `web` and see changes instantly:
-
-- Make changes to any component
-- Save the file
-- The widget will automatically update in ChatGPT without refreshing or reconnecting
-- The Express server and MCP server continue running without interruption
-
-**Note:** When you modify widget components, changes will be reflected immediately. If you modify MCP server code (in `src/`), you may need to reload your connector in **Settings → Connectors → [Your connector] → Reload**.
-
-## Widget Naming Convention
-
-**Important:** For a widget to work properly, the name of the endpoint in your MCP server must match the file name of the corresponding React component in `web/src/widgets/`.
-
-For example:
-
-- If you create a widget endpoint named `pokemon-card`, you must create a corresponding React component file at `web/src/widgets/pokemon-card.tsx`
-- The endpoint name and the widget file name (without the `.tsx` extension) must be identical
-
-This naming convention allows the system to automatically map widget requests to their corresponding React components.
+Modify files in `server/` and reload your ChatGPT connector in **Settings → Connectors → [Your connector] → Reload**
 
 ## Deploy to Production
 
-Use Alpic to deploy your OpenAI App to production.
+Use [Alpic](https://alpic.ai/) to deploy your OpenAI App to production
 
 [![Deploy on Alpic](https://assets.alpic.ai/button.svg)](https://app.alpic.ai/new/clone?repositoryUrl=https%3A%2F%2Fgithub.com%2Falpic-ai%2Fapps-sdk-template)
 
 - In ChatGPT, navigate to **Settings → Connectors → Create** and add your MCP server URL (e.g., `https://your-app-name.alpic.live`)
 
-## Project Structure
-
-```
-.
-├── server/
-│   ├── app.ts          # OpenAI App extension class with widget API implementation
-│   ├── server.ts       # MCP server with tool/resource/prompt registration
-│   └── index.ts        # Express server definition
-└── web/
-    └── src/
-        └── widgets/    # React widget components (must match endpoint names)
-```
-
 ## Resources
 
+- [Skybridge Documentation](https://docs.skybridge.tech)
 - [Apps SDK Documentation](https://developers.openai.com/apps-sdk)
 - [Model Context Protocol Documentation](https://modelcontextprotocol.io/)
 - [Alpic Documentation](https://docs.alpic.ai/)
