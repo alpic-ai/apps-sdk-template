@@ -24,8 +24,8 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
       skybridge:
-        specifier: '>=0.25.0 <1.0.0'
-        version: 0.26.0(@modelcontextprotocol/sdk@1.25.3(hono@4.11.5)(zod@4.3.5))(@types/node@25.0.10)(@types/react@19.2.9)(nodemon@3.1.11)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.3))
+        specifier: '>=0.30.0 <1.0.0'
+        version: 0.30.0(@modelcontextprotocol/sdk@1.25.3(hono@4.11.5)(zod@4.3.5))(@types/node@25.0.10)(@types/react@19.2.9)(nodemon@3.1.11)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.3))
       vite:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.0.10)(tsx@4.21.0)
@@ -2805,6 +2805,15 @@ packages:
 
   skybridge@0.26.0:
     resolution: {integrity: sha512-kZcOu27L2sNqt6PkO+CLtyalFKg1j8+bHMAuAUJKSVgLBLo+M1IStyNyAFLEU3ZFLwuVJBpd4KrR4ca/BT904A==}
+    hasBin: true
+    peerDependencies:
+      '@modelcontextprotocol/sdk': '>=1.0.0'
+      nodemon: '>=3.0.0'
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  skybridge@0.30.0:
+    resolution: {integrity: sha512-YYHiMcPU/CXGFY0FVm5bNmlho8hVFheHMvtTAROUGS/OLMaqEeoJBhUcKl8onAQFPbvV0sBYSMJxS6OmDCthsw==}
     hasBin: true
     peerDependencies:
       '@modelcontextprotocol/sdk': '>=1.0.0'
@@ -6127,6 +6136,45 @@ snapshots:
   sisteransi@1.0.5: {}
 
   skybridge@0.26.0(@modelcontextprotocol/sdk@1.25.3(hono@4.11.5)(zod@4.3.5))(@types/node@25.0.10)(@types/react@19.2.9)(nodemon@3.1.11)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.3)):
+    dependencies:
+      '@babel/core': 7.28.6
+      '@modelcontextprotocol/sdk': 1.25.3(hono@4.11.5)(zod@4.3.5)
+      '@oclif/core': 4.8.0
+      ci-info: 4.3.1
+      cors: 2.8.5
+      dequal: 2.0.3
+      es-toolkit: 1.44.0
+      express: 5.2.1
+      handlebars: 4.7.8
+      ink: 6.6.0(@types/react@19.2.9)(react@19.2.3)
+      nodemon: 3.1.11
+      posthog-node: 5.24.1
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+      superjson: 2.2.6
+      vite: 7.3.1(@types/node@25.0.10)(tsx@4.21.0)
+      zustand: 5.0.10(@types/react@19.2.9)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
+    transitivePeerDependencies:
+      - '@types/node'
+      - '@types/react'
+      - bufferutil
+      - immer
+      - jiti
+      - less
+      - lightningcss
+      - react-devtools-core
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - use-sync-external-store
+      - utf-8-validate
+      - yaml
+
+  skybridge@0.30.0(@modelcontextprotocol/sdk@1.25.3(hono@4.11.5)(zod@4.3.5))(@types/node@25.0.10)(@types/react@19.2.9)(nodemon@3.1.11)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tsx@4.21.0)(use-sync-external-store@1.6.0(react@19.2.3)):
     dependencies:
       '@babel/core': 7.28.6
       '@modelcontextprotocol/sdk': 1.25.3(hono@4.11.5)(zod@4.3.5)
