@@ -31,7 +31,7 @@ jobs:
       - name: Create PR
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: update-skybridge-${{ steps.generate.outputs.version }}
+          branch: update-skybridge-template
           commit-message: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
           title: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
           body: "Automated update to skybridge v${{ steps.generate.outputs.version }}"
