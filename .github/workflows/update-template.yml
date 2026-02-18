@@ -1,0 +1,39 @@
+name: Update Template
+
+on:
+  push:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      # Wipe everything except .git, scaffold fresh, restore README and .github
+      - name: Generate fresh template
+        id: generate
+        run: |
+          find . -maxdepth 1 ! -name . ! -name .git -exec rm -rf {} +
+          npm create skybridge@latest .
+          git checkout HEAD -- README.md .github
+          VERSION=$(node -p "require('./package.json').dependencies.skybridge.match(/\d+\.\d+\.\d+/)[0]")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update-skybridge-${{ steps.generate.outputs.version }}
+          commit-message: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
+          title: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
+          body: "Automated update to skybridge v${{ steps.generate.outputs.version }}"
