@@ -35,3 +35,4 @@ jobs:
           commit-message: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
           title: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
           body: "Automated update to skybridge v${{ steps.generate.outputs.version }}"
+          delete-branch: true
