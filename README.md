@@ -9,7 +9,6 @@ A minimal TypeScript template for building ChatGPT and MCP Apps with widget rend
 ### Prerequisites
 
 - Node.js 24+
-- pnpm (install with npm install -g pnpm)
 - HTTP tunnel such as [ngrok](https://ngrok.com/download)
 
 ### Local Development
@@ -19,7 +18,7 @@ A minimal TypeScript template for building ChatGPT and MCP Apps with widget rend
 ```bash
 git clone git@github.com:alpic-ai/apps-sdk-template.git
 cd apps-sdk-template
-pnpm install
+npm install
 ```
 
 #### 2. Start your local server
@@ -27,7 +26,7 @@ pnpm install
 Run the development server from the root directory:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 Open DevTools to test your app locally: http://localhost:3000/

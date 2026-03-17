@@ -1,20 +1,21 @@
 name: Update Template
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   update:
+    if: github.repository == 'alpic-ai/apps-sdk-template'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: "24"
 
@@ -28,11 +29,18 @@ jobs:
           VERSION=$(node -p "require('./package.json').dependencies.skybridge.match(/\d+\.\d+\.\d+/)[0]")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Create PR
-        uses: peter-evans/create-pull-request@v7
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify server starts
+        run: |
+          npm start &
+          npx wait-on tcp:3000 --timeout 30000
+          npx @modelcontextprotocol/inspector --cli http://localhost:3000/mcp --transport http --method tools/list
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: update-skybridge-template
-          commit-message: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
-          title: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
-          body: "Automated update to skybridge v${{ steps.generate.outputs.version }}"
-          delete-branch: true
+          commit_message: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
