@@ -4,6 +4,7 @@
     "chatgpt-app-builder": {
       "source": "alpic-ai/skybridge",
       "sourceType": "github",
+      "skillPath": "skills/chatgpt-app-builder/SKILL.md",
       "computedHash": "a5f7e478f9af8939b7571973927c2468b453e8959989ee9883b666e1818ca32b"
     }
   }
