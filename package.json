@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "skybridge dev",
+    "dev:tunnel": "skybridge dev --tunnel",
     "build": "skybridge build",
     "start": "skybridge start",
     "deploy": "alpic deploy"
@@ -14,14 +15,14 @@
     "@modelcontextprotocol/sdk": "^1.29.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "skybridge": ">=0.35.14 <1.0.0",
+    "skybridge": ">=0.36.1",
     "vite": "^8.0.3",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@skybridge/devtools": ">=0.35.14 <1.0.0",
-    "@types/react": "^19.2.14",
     "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "alpic": "^1.104.1",
