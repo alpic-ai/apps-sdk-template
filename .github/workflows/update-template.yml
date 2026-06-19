@@ -41,6 +41,6 @@ jobs:
           npx wait-on tcp:3000 --timeout 30000
           npx @modelcontextprotocol/inspector --cli http://localhost:3000/mcp --transport http --method tools/list
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: update template to skybridge v${{ steps.generate.outputs.version }}"
