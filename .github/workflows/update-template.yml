@@ -24,7 +24,7 @@ jobs:
         id: generate
         run: |
           find . -maxdepth 1 ! -name . ! -name .git -exec rm -rf {} +
-          npm create skybridge@latest .
+          npm create skybridge@latest -- . --yes --overwrite
           git checkout HEAD -- README.md .github
           VERSION=$(node -p "require('./package.json').dependencies.skybridge.match(/\d+\.\d+\.\d+/)[0]")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
