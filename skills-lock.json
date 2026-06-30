@@ -1,11 +1,11 @@
 {
   "version": 1,
   "skills": {
-    "skybridge": {
+    "chatgpt-app-builder": {
       "source": "alpic-ai/skybridge",
       "sourceType": "github",
-      "skillPath": "skills/skybridge/SKILL.md",
-      "computedHash": "be6aaae5b5aaed6ec64440e3c53faa34d64705fe7450e63283fbd6fba06da3a1"
+      "skillPath": "skills/chatgpt-app-builder/SKILL.md",
+      "computedHash": "7f071565f8e43024a0c84afc4c8d0d9f7f8a343e57c8905fa9089d6a31e6b1aa"
     }
   }
 }
