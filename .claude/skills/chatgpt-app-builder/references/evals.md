@@ -6,7 +6,7 @@ DevTools proves a tool works when called. An eval proves the model *calls* it, w
 
 ## Setup
 
-1. Dev dependencies: `@skybridge/test@beta` (published on the `beta` dist-tag only), `vitest`, `ai`, and an AI SDK provider (`@ai-sdk/anthropic`, `@ai-sdk/openai`, ...).
+1. Dev dependencies: `@skybridge/test@beta` (published on the `beta` dist-tag only), `vitest@^4` (vitest 5 is not supported yet), `ai`, and an AI SDK provider (`@ai-sdk/anthropic`, `@ai-sdk/openai`, ...).
 2. `vite.config.ts`: `skybridge({ evals: {} })`. This registers the `expect.chat` matchers, picks up `evals/**/*.eval.ts`, raises the per-scenario timeout to two minutes, and loads `.env`.
 3. `package.json`: `"evals": "vitest run evals"`.
 4. The provider key in `.env` (`ANTHROPIC_API_KEY` for `@ai-sdk/anthropic`). If the app has `oauth`, its provider env is needed too: `setup` and `oauth` resolve on the first request.
@@ -44,8 +44,10 @@ All typed against the app's registry (`name` autocompletes, `args` is checked ag
 | `toNeverHaveCalledTool(name)` | no call was attempted |
 | `toHaveFailedToolCall(name)` | a call was refused (auth) or threw |
 | `toHaveSaid(text \| RegExp)` | an assistant turn contains it (string match is case- and whitespace-insensitive) |
+| `toHaveCalledToolsInOrder(...names)` | the named tools *succeeded* in that relative order (subsequence, gaps allowed) |
+| `toHaveCalledNoTools()` | no tool was attempted at all |
 
-On failure the message lists every call the model made, with arguments. `chat.toolCalls` and `chat.assistantTurns` are available for custom assertions.
+On failure the message lists every call the model made, with arguments. Matchers see the whole conversation, not just the last `send`. `chat.toolCalls` and `chat.assistantTurns` are available for custom assertions.
 
 ## Authenticated apps
 
