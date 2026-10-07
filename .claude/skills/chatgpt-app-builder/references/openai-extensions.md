@@ -1,6 +1,6 @@
 # OpenAI MCP extensions
 
-Let users open a view without the model → `openai` on `registerTool`, `useDeepLink`, `useHost().openaiCapabilities`. Mentions, titled messages and local files → `registerMentions`, `useSendFollowUpMessage`, `useOpenFile`
+Let users open a view without the model → `openai` on `registerTool`, `useDeepLink`, `useHost().openaiCapabilities`. Mentions, titled messages and local files → `registerMentions`, `useSendFollowUpMessage`, `useOpenFile`, `registerFileViewer`, `useFileResource`. Settings and forms → `registerSettings`, `requestFormInput`
 
 These are OpenAI MCP extensions, not part of MCP or MCP Apps: only ChatGPT reads them, other hosts ignore them.
 
@@ -22,22 +22,23 @@ server.registerTool(
 );
 ```
 
-File viewer, called with the opened file:
+File viewer, called with the opened file as `{ file: { name, resourceUri } }`:
 
 ```ts
-server.registerTool(
+server.registerFileViewer(
   {
     name: "part-viewer",
     title: "Part Viewer",
     description: "Open a CAD part.",
-    inputSchema: { file: z.object({ name: z.string(), resourceUri: z.string() }) },
+    extensions: [".stl"],
     icons: [{ src: "https://example.com/part.svg", mimeType: "image/svg+xml" }],
     view: { component: "part-viewer" },
-    openai: { entrypoints: [{ type: "file", extensions: [".stl"] }] },
   },
   async ({ file }) => ({ structuredContent: { name: file.name } }),
 );
 ```
+
+The view reads and saves the opened file with `useFileResource(input.file?.resourceUri)`, see [Reading and saving the opened file](#reading-and-saving-the-opened-file).
 
 - `global` adds a sidebar entry, `thread` a tab in a conversation's side panel, `file` a viewer for those file extensions.
 - ChatGPT calls global and thread tools with `{}`: every input must be optional, or Skybridge throws at startup.
@@ -103,6 +104,55 @@ server.registerMentions({
 
 Users type `@` and the app to mention individual items. The tool is hidden from the model. ChatGPT desktop only. Serve the returned `uri`s as resources (`server.registerResource`) so the host can read the picked item.
 
+## Settings
+
+```ts
+server.registerSettings({
+  fields: {
+    units: { title: "Units", schema: z.enum(["mm", "in"]) },
+    showGrid: { title: "Show grid", schema: z.boolean() },
+  },
+  layout: [
+    {
+      kind: "group",
+      title: "Display",
+      items: [
+        { kind: "property", property: "units" },
+        { kind: "tool", tool: "browse-parts", title: "Browse parts" },
+      ],
+    },
+  ],
+  read: (extra) => loadSettings(extra),
+  update: (set, extra) => saveSettings(set, extra),
+});
+```
+
+Adds the app's page to ChatGPT's app settings. Fields are zod booleans, strings, string enums, numbers or integers, without defaults. `read` returns every value, `update` gets only the changed fields and returns every value. The server stores the values, per user when it uses OAuth. A `tool` item is a button that calls a tool with `{}`. A tool with a view opens in a modal, and any other tool shows the text `content` it returns. Startup fails on a layout naming an unknown or duplicate field.
+
+## Forms
+
+```ts
+server.registerTool({ name: "inspect-part" }, (_args, extra) => {
+  const result = requestFormInput(extra, {
+    key: "part",
+    message: "Choose a part",
+    requestedSchema: {
+      type: "object",
+      properties: {
+        part: { type: "string", oneOf: [{ const: "hex-bolt", title: "M6 hex bolt" }] },
+      },
+      required: ["part"],
+    },
+  });
+  if ("resultType" in result) {
+    return result;
+  }
+  return { content: result.action === "accept" ? `Inspecting ${result.content.part}` : "No part chosen." };
+});
+```
+
+Asks the user to fill a form before the tool finishes. The first call returns an `input_required` result to return as is; ChatGPT shows the form and calls the tool again, and the same `requestFormInput` call then returns `{ action, content }`. Fields are MCP form fields plus `pattern`, option `description` and `x-openai-thumbnail`, `x-openai-suggestions`, and `x-openai-input: { type: "resource", options, userOptions }` for resource pickers. Needs MCP `2026-07-28` and ChatGPT desktop or web; throws elsewhere. Use a different `key` per form.
+
 ## Messages
 
 ```tsx
@@ -124,3 +174,19 @@ if (openaiCapabilities.files) {
 ```
 
 Needs ChatGPT desktop, with a path on the machine that runs it. ChatGPT shows the file in its built-in viewer, not in your file entrypoint. `openFile` rejects elsewhere.
+
+## Reading and saving the opened file
+
+```tsx
+const { input } = useToolInfo<"open-part">();
+const { data, write } = useFileResource(input.file?.resourceUri, { representation: "text" });
+await write({ text: edited });
+```
+
+- ChatGPT never gives the view the path, only `file.resourceUri`. The hook re-reads the file when it changes.
+- `write` sends the current `etag` when ChatGPT returned one: it resolves `conflict` if the file changed (and re-reads it), `too-large` past the size limit.
+- Check `data.writable` before offering a save.
+
+## Onboarding
+
+Add `"extensions": { "com.openai": { "onboardingSkill": "./src/skills/setup/SKILL.md" } }` to the plugin manifest to offer a setup skill users run after install. Skybridge doesn't generate that manifest.
