@@ -3,7 +3,7 @@
   "skills": {
     "chatgpt-app-builder": {
       "source": "alpic-ai/skybridge",
-      "commit": "003973e25d0db28e5c4d511ea8d1f020213b9c14",
+      "commit": "5cd3f8ca0d67826aef39f568dadb737a3ba94f95",
       "sourceType": "github",
       "skillPath": "skills/chatgpt-app-builder/SKILL.md",
       "computedHash": "d7af23000ef0a97b138749217f82e97b14a18a0a1d6acc53d0aff1056923008c",
